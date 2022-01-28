@@ -22,7 +22,7 @@ RUN apt-get update && \
 #     chmod 7775 /usr/bin/sudo 
 # USER root
 
-RUN apt-get update && apt-get install -y python3.8 python3-distutils python3-pip python3-apt
+RUN apt-get update && apt-get install -y python3.8 python3-distutils python3-pip python3-apt sudo
 # Include global arg in this stage of the build
 ARG FUNCTION_DIR
 # Create function directory
@@ -41,7 +41,10 @@ RUN pip3 install \
         awslambdaric
 
 WORKDIR ${FUNCTION_DIR}
+# RUN echo "sbx_user1051:sbx_user1051" | chpasswd && adduser sbx_user1051 sudo
+USER root
 
-ENTRYPOINT ["su", "root", ";", "python3", "-m", "awslambdaric" ]
+ENTRYPOINT ["python3", "-m", "awslambdaric" ]
+# ENTRYPOINT ["python3", "-m", "awslambdaric" ]
 CMD [ "app.main"]
         
