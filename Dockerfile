@@ -3,7 +3,7 @@ ARG FUNCTION_DIR="/function"
 
 FROM ubuntu:latest
 
-# Install aws-lambda-cpp build dependencies
+#Install aws-lambda-cpp build dependencies
 RUN apt-get update && \
   apt-get install -y \
   g++ \
